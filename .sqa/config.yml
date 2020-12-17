@@ -1,0 +1,21 @@
+# .sqa/config.yml - jenkins-pipeline-library configuration file
+config:
+  project_repos:
+    saps-archiver:
+      repo: 'https://github.com/EOSC-synergy/saps-archiver'
+      branch: develop
+
+sqa_criteria:
+   qc_style:
+     repos:
+       saps-archiver:
+         container: archiver-testing
+         commands:
+           - mvn -f /saps-archiver-repo/pom.xml spotless:check
+   qc_coverage:
+     repos:
+       saps-archiver:
+         container: archiver-testing
+         commands:
+           - mvn -f /saps-archiver-repo/pom.xml -B -DskipTests clean package
+           - mvn -f /saps-archiver-repo/pom.xml test
